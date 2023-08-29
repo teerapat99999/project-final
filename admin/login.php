@@ -13,18 +13,21 @@ if (isset($_POST['login'])) {
     $db->select("admin","*","name_a = '$username' AND password = '$password'");
 
     if ($db-> query -> num_rows > 0) {
+
         $fetch  = $db -> query -> fetch_object();
         $_SESSION['userid'] = $fetch -> id_u;
         
         if($fetcb -> type === 'user'){
             $_SESSION['alert'] = 'user';
-            header('location:.')
-        }else{
-            $_SESSION['alert'] = 'admin';
-            header('location:')
+            header('location:');
+            return;
+        } else {
+            $_SESSION['alert'] = 'admin !';
+            header('location:');
+            return;
         }
         return;
-    } else {
+        } else {
         $_SESSION['alert'] = 'Username / Password Wrong !!';
         header('location:' . $_SERVER['REQUEST_URI']);
         return;

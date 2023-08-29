@@ -14,15 +14,15 @@ if (isset($_POST['register'])) {
     $fileNew = $db -> uploadFile($img);
 
     $data = [
-        'username_a' => $username_a,
+        'name_a' => $username_a,
         'lastname_a' => $lastname_a,
-        'password_a' => $password,
+        'password' => $password,
         'email_a' => $email_a,
         "img_a" => $fileNew,
         
     ];
 
-    $db->insertWhere('admin', $data,"(SELECT name_a FROM admin WHERE name_a = '$username')");
+    $db->insertWhere('admin', $data,"(SELECT name_a FROM admin WHERE name_a = '$username_a')");
 
     if ($db->mysqli->affected_rows > 0) {
         $_SESSION['alert'] = 'Register Success !';
